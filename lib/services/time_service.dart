@@ -1,8 +1,11 @@
 
 class TimeService {
   /// Sistem yerel saatini döndürür (Fiziksel cihazlarda en güvenilir yöntem)
+  /// İstasyonlardaki fiziksel saatler normalden 30 saniye geride çalıştığı için,
+  /// trenlerin varış sürelerini ve haritadaki konumlarını istasyonla senkronize etmek
+  /// adına genel zamandan 30 saniye çıkarıyoruz.
   static DateTime nowTR() {
-    return DateTime.now();
+    return DateTime.now().subtract(const Duration(seconds: 30));
   }
 
   /// Bir sonraki tren vaktini bulur.
@@ -74,7 +77,11 @@ class TimeService {
     } else if (diff.inMinutes == 0) {
       return '$secs ${isEN ? 'sec' : 'sn'}';
     } else {
-      return '${diff.inMinutes} ${isEN ? 'min' : 'dk'}';
+      int displayMins = diff.inMinutes;
+      if (secs > 0) {
+        displayMins += 1;
+      }
+      return '$displayMins ${isEN ? 'min' : 'dk'}';
     }
   }
 

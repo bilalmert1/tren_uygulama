@@ -10,6 +10,8 @@ import '../models/station.dart';
 import '../services/train_tracker_service.dart';
 import '../services/location_service.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
+import '../data/baskentray_route.dart';
 import 'detail_screen.dart';
 
 class HomeMapScreen extends StatefulWidget {
@@ -121,10 +123,8 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                   PolylineLayer(
                     polylines: [
                       Polyline(
-                        points: _generateSmoothLine(
-                          Station.allStations.map((s) => LatLng(s.latitude, s.longitude)).toList(),
-                        ),
-                        color: const Color(0xFF00FF88).withOpacity(0.4),
+                        points: BaskentrayRoute.points,
+                        color: AppColors.primaryBlue.withOpacity(0.6),
                         strokeWidth: 4,
                       ),
                     ],
@@ -216,13 +216,13 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1A1A1A).withOpacity(0.9),
+                    color: AppColors.cardWhite.withOpacity(0.95),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                        color: const Color(0xFF00FF88).withOpacity(0.3)),
+                        color: AppColors.primaryBlue.withOpacity(0.3)),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
+                        color: Colors.black.withOpacity(0.1),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -230,14 +230,14 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.radar, color: Color(0xFF00FF88), size: 20),
+                      const Icon(Icons.radar, color: AppColors.primaryBlue, size: 20),
                       const SizedBox(width: 12),
                       Text(
                         isEN
                             ? 'Active Trains: ${_activeTrains.length}'
                             : 'Seyir Halindeki Tren: ${_activeTrains.length}',
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.primaryNavy,
                           fontWeight: FontWeight.w700,
                           fontSize: 14,
                         ),
@@ -254,10 +254,10 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                   right: 16,
                   child: FloatingActionButton(
                     mini: true,
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColors.primaryNavy,
                     onPressed: () => _mapController.move(_userLocation!, 15.0),
                     child: const Icon(Icons.my_location,
-                        color: Color(0xFF1A1A1A), size: 20),
+                        color: Colors.white, size: 20),
                   ),
                 ),
             ],
@@ -325,16 +325,16 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1A1A),
+            color: AppColors.primaryNavy,
             borderRadius: BorderRadius.circular(6),
-            border: Border.all(color: const Color(0xFF00FF88), width: 0.5),
+            border: Border.all(color: AppColors.accentYellow, width: 0.5),
           ),
           child: Text(
             isSincan
                 ? (isEN ? '→ Sincan' : 'Sincan\'a Gidiyor')
                 : (isEN ? '← Kayaş' : 'Kayaş\'a Gidiyor'),
             style: const TextStyle(
-                color: Color(0xFF00FF88),
+                color: AppColors.accentYellow,
                 fontSize: 8,
                 fontWeight: FontWeight.bold),
           ),
@@ -348,17 +348,17 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
               width: 24,
               height: 24,
               decoration: BoxDecoration(
-                color: const Color(0xFF00FF88),
+                color: AppColors.accentYellow,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF00FF88).withOpacity(0.4),
+                    color: AppColors.accentYellow.withOpacity(0.4),
                     blurRadius: 8,
                   ),
                 ],
               ),
               child: const Center(
-                child: Icon(Icons.train, size: 14, color: Colors.black),
+                child: Icon(Icons.train, size: 14, color: AppColors.primaryNavy),
               ),
             ),
             Positioned(
@@ -366,7 +366,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
               left: !isSincan ? -12 : null,
               child: Icon(
                 isSincan ? Icons.arrow_right : Icons.arrow_left,
-                color: const Color(0xFF00FF88),
+                color: AppColors.primaryNavy,
                 size: 20,
               ),
             ),
@@ -385,37 +385,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
     );
   }
 
-  /// Catmull-Rom spline kullanarak istasyonlar arasına yumuşak kavisli bir yol çizer
-  List<LatLng> _generateSmoothLine(List<LatLng> points) {
-    if (points.length < 3) return points;
-    List<LatLng> smoothPoints = [];
-    for (int i = 0; i < points.length - 1; i++) {
-      final p0 = i == 0 ? points[i] : points[i - 1];
-      final p1 = points[i];
-      final p2 = points[i + 1];
-      final p3 = i == points.length - 2 ? points[i + 1] : points[i + 2];
-      
-      // 10 parçaya bölerek kavis oluştur
-      for (double t = 0; t < 1; t += 0.1) {
-        final t2 = t * t;
-        final t3 = t2 * t;
-        
-        final lat = 0.5 * ((2 * p1.latitude) +
-            (-p0.latitude + p2.latitude) * t +
-            (2 * p0.latitude - 5 * p1.latitude + 4 * p2.latitude - p3.latitude) * t2 +
-            (-p0.latitude + 3 * p1.latitude - 3 * p2.latitude + p3.latitude) * t3);
-            
-        final lng = 0.5 * ((2 * p1.longitude) +
-            (-p0.longitude + p2.longitude) * t +
-            (2 * p0.longitude - 5 * p1.longitude + 4 * p2.longitude - p3.longitude) * t2 +
-            (-p0.longitude + 3 * p1.longitude - 3 * p2.longitude + p3.longitude) * t3);
-            
-        smoothPoints.add(LatLng(lat, lng));
-      }
-    }
-    smoothPoints.add(points.last);
-    return smoothPoints;
-  }
+
 }
 
 /// Google Maps tarzı yön konisi

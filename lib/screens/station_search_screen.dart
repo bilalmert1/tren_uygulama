@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/station.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 import 'detail_screen.dart';
 
 class StationSearchScreen extends StatefulWidget {
@@ -52,20 +53,20 @@ class _StationSearchScreenState extends State<StationSearchScreen> {
         final isEN = AppState.instance.locale.languageCode == 'en';
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
               widget.title,
               style: const TextStyle(
-                color: Color(0xFF1A1A1A),
+                color: AppColors.primaryNavy,
                 fontWeight: FontWeight.w800,
               ),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new,
-                  color: Color(0xFF1A1A1A), size: 20),
+                  color: AppColors.primaryNavy, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -134,7 +135,7 @@ class _StationSearchScreenState extends State<StationSearchScreen> {
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1A1A1A),
+              color: AppColors.primaryNavy,
             ),
           ),
           const SizedBox(height: 4),
@@ -167,11 +168,11 @@ class _StationSearchScreenState extends State<StationSearchScreen> {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1A1A).withOpacity(0.06),
+            color: AppColors.primaryNavy.withOpacity(0.06),
             shape: BoxShape.circle,
           ),
           child: const Center(
-            child: Icon(Icons.train, size: 18, color: Color(0xFF1A1A1A)),
+            child: Icon(Icons.train, size: 18, color: AppColors.primaryNavy),
           ),
         ),
         title: Text(

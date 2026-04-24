@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../services/time_service.dart';
 import '../providers/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../theme/app_colors.dart';
 import 'home_screen.dart';
 import 'home_map_screen.dart';
 import 'favorites_screen.dart';
@@ -37,24 +38,28 @@ class _MainScaffoldState extends State<MainScaffold> {
         return Scaffold(
           drawer: _buildDrawer(context, isEN),
           appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0.5,
+            backgroundColor: AppColors.primaryNavy,
+            elevation: 0,
             leading: Builder(
               builder: (ctx) => IconButton(
-                icon: const Icon(Icons.menu, color: Color(0xFF1A1A1A)),
+                icon: const Icon(Icons.menu, color: Colors.white),
                 onPressed: () => Scaffold.of(ctx).openDrawer(),
               ),
             ),
-            title: const Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('🚆', style: TextStyle(fontSize: 20)),
-                SizedBox(width: 8),
-                Text(
+                Image.asset(
+                  'assets/images/logo_transparent.png',
+                  height: 28,
+                  errorBuilder: (context, error, stackTrace) => const Text('🚆', style: TextStyle(fontSize: 20)),
+                ),
+                const SizedBox(width: 8),
+                const Text(
                   'ANKARA BANLİYÖ',
                   style: TextStyle(
-                    color: Color(0xFF1A1A1A),
+                    color: Colors.white,
                     fontWeight: FontWeight.w900,
                     fontSize: 16,
                     letterSpacing: 1.2,
@@ -71,12 +76,12 @@ class _MainScaffoldState extends State<MainScaffold> {
           ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.cardWhite,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
-                  blurRadius: 20,
-                  offset: const Offset(0, -4),
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, -2),
                 ),
               ],
             ),
@@ -85,10 +90,10 @@ class _MainScaffoldState extends State<MainScaffold> {
                 currentIndex: _currentIndex,
                 onTap: (i) => setState(() => _currentIndex = i),
                 type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.white,
+                backgroundColor: AppColors.cardWhite,
                 elevation: 0,
-                selectedItemColor: const Color(0xFF1A1A1A),
-                unselectedItemColor: Colors.grey[400],
+                selectedItemColor: AppColors.primaryBlue,
+                unselectedItemColor: AppColors.lightBlue,
                 selectedFontSize: 11,
                 unselectedFontSize: 11,
                 selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -133,21 +138,26 @@ class _MainScaffoldState extends State<MainScaffold> {
               width: double.infinity,
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF1A2A3A), Color(0xFF000000)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                color: AppColors.primaryNavy,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/drawer_header_bg.png'),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
                 ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('🚆', style: TextStyle(fontSize: 36)),
+                  Image.asset(
+                    'assets/images/logo_transparent.png',
+                    height: 40,
+                    errorBuilder: (context, error, stackTrace) => const Text('🚆', style: TextStyle(fontSize: 36)),
+                  ),
                   const SizedBox(height: 10),
                   const Text('Ankara Banliyö', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
-                  const Text('Başkentray Hattı', style: TextStyle(color: Colors.white54, fontSize: 12)),
+                  const Text('Başkentray Hattı', style: TextStyle(color: Colors.white70, fontSize: 12)),
                   const SizedBox(height: 10),
-                  const Text('Sincan ↔ Kayaş', style: TextStyle(color: Color(0xFF00FF88), fontWeight: FontWeight.bold, fontSize: 12)),
+                  const Text('Sincan ↔ Kayaş', style: TextStyle(color: AppColors.accentYellow, fontWeight: FontWeight.bold, fontSize: 12)),
                 ],
               ),
             ),
@@ -216,7 +226,7 @@ class _MainScaffoldState extends State<MainScaffold> {
             const Spacer(),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: Text('© 2025 Ankara Banliyö', style: TextStyle(color: Colors.grey[400], fontSize: 11)),
+              child: Text('© 2026 BMB', style: TextStyle(color: Colors.grey[400], fontSize: 11)),
             ),
           ],
         ),
@@ -245,7 +255,7 @@ class _MainScaffoldState extends State<MainScaffold> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFF1A1A1A) : const Color(0xFFF5F7FA),
+            color: isSelected ? AppColors.primaryBlue : AppColors.backgroundLight,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
@@ -253,7 +263,7 @@ class _MainScaffoldState extends State<MainScaffold> {
               label,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: isSelected ? Colors.white : Colors.grey[600],
+                color: isSelected ? Colors.white : AppColors.textMedium,
                 fontSize: 12,
               ),
             ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/station.dart';
 import '../providers/app_state.dart';
 import '../services/time_service.dart';
+import '../services/time_service.dart';
+import '../theme/app_colors.dart';
 import 'detail_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -23,7 +25,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         final displayed = allStations.where((s) => favNames.contains(s.name)).toList();
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           body: Column(
             children: [
               const SizedBox(height: 12),
@@ -44,7 +46,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text('${station.name} ${isEN ? 'removed from favorites' : 'favorilerden silindi'}'),
-                                  backgroundColor: const Color(0xFF1A1A1A),
+                                  backgroundColor: AppColors.primaryNavy,
                                   duration: const Duration(seconds: 2),
                                 ),
                               );
@@ -168,7 +170,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         icon: const Icon(Icons.add_circle_outline),
         label: Text(isEN ? 'Add More' : '+ Yeni Durak Ekle'),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF1A1A1A),
+          backgroundColor: AppColors.primaryNavy,
           foregroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 54),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -222,11 +224,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           leading: Container(
                             width: 36, height: 36,
                             decoration: BoxDecoration(
-                              color: isFav ? Colors.amber.withOpacity(0.12) : const Color(0xFF1A1A1A).withOpacity(0.06),
+                              color: isFav ? AppColors.accentYellow.withOpacity(0.12) : AppColors.primaryBlue.withOpacity(0.06),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
-                              child: Icon(Icons.train, size: 16, color: isFav ? Colors.amber[700] : const Color(0xFF1A1A1A)),
+                              child: Icon(Icons.train, size: 16, color: isFav ? AppColors.accentYellow : AppColors.primaryBlue),
                             ),
                           ),
                           title: Text(station.name, style: const TextStyle(fontWeight: FontWeight.w600)),

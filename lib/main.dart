@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'providers/app_state.dart';
 import 'screens/main_scaffold.dart';
+import 'theme/app_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,23 +43,37 @@ class AnkaraTrenApp extends StatelessWidget {
           ],
           theme: ThemeData(
             useMaterial3: true,
-            primaryColor: const Color(0xFF1A1A1A),
+            scaffoldBackgroundColor: AppColors.backgroundLight,
+            primaryColor: AppColors.primaryNavy,
             colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF2C3E50),
-              primary: const Color(0xFF1A1A1A),
-              secondary: const Color(0xFF00FF88),
+              seedColor: AppColors.primaryBlue,
+              primary: AppColors.primaryNavy,
+              secondary: AppColors.accentYellow,
             ),
             textTheme: const TextTheme(
-              displayLarge: TextStyle(fontWeight: FontWeight.w900),
-              headlineMedium: TextStyle(fontWeight: FontWeight.w800),
-              titleLarge: TextStyle(fontWeight: FontWeight.w700),
+              displayLarge: TextStyle(fontWeight: FontWeight.w900, color: AppColors.textDark),
+              headlineMedium: TextStyle(fontWeight: FontWeight.w800, color: AppColors.textDark),
+              titleLarge: TextStyle(fontWeight: FontWeight.w700, color: AppColors.textDark),
+              bodyLarge: TextStyle(color: AppColors.textDark),
+              bodyMedium: TextStyle(color: AppColors.textMedium),
             ),
             cardTheme: CardTheme(
-              elevation: 0,
+              elevation: 4,
+              shadowColor: Colors.black12,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              color: Colors.white,
+              color: AppColors.cardWhite,
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.primaryNavy,
+              foregroundColor: Colors.white,
+              elevation: 0,
+            ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: AppColors.primaryNavy,
+              selectedItemColor: AppColors.accentYellow,
+              unselectedItemColor: AppColors.lightBlue,
             ),
           ),
           home: const MainScaffold(),

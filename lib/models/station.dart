@@ -61,7 +61,7 @@ class Station {
     _addInterval(times, '08:30', '21:00', 15);
     
     // Gece (Her 30 dk)
-    times.addAll(['21:30', '22:00', '22:30', '23:00']);
+    times.addAll(['21:30', '22:00', '22:30', '23:00', '23:30']);
     
     times.sort();
     return times;
@@ -85,7 +85,7 @@ class Station {
     _addInterval(times, '08:15', '21:00', 15);
     
     // Gece (Her 30 dk)
-    times.addAll(['21:30', '22:00', '22:30', '23:00']);
+    times.addAll(['21:30', '22:00', '22:30', '23:00', '23:30']);
     
     times.sort();
     return times;

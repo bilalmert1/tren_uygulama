@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 
 class SorunBildirScreen extends StatefulWidget {
   const SorunBildirScreen({super.key});
@@ -27,7 +28,7 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(isEN ? 'Issue reported!' : 'Sorunun iletildi!'),
-        backgroundColor: const Color(0xFF1A1A1A),
+        backgroundColor: AppColors.primaryNavy,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -43,20 +44,20 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
         final issues = AppState.instance.reportedIssues;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
               isEN ? 'Report Issue' : 'Sorun Bildir',
               style: const TextStyle(
-                color: Color(0xFF1A1A1A),
+                color: AppColors.primaryNavy,
                 fontWeight: FontWeight.w800,
               ),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new,
-                  color: Color(0xFF1A1A1A), size: 20),
+                  color: AppColors.primaryNavy, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -98,7 +99,7 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
                           style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 16,
-                            color: Color(0xFF1A1A1A),
+                            color: AppColors.primaryNavy,
                           ),
                         ),
                       ],
@@ -113,7 +114,7 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
                             : 'Karşılaştığınız sorunu açıklayın...',
                         hintStyle: TextStyle(color: Colors.grey[400]),
                         filled: true,
-                        fillColor: const Color(0xFFF5F7FA),
+                        fillColor: AppColors.backgroundLight,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                           borderSide: BorderSide.none,
@@ -121,7 +122,7 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                           borderSide: const BorderSide(
-                              color: Color(0xFF1A1A1A), width: 1.5),
+                              color: AppColors.primaryNavy, width: 1.5),
                         ),
                       ),
                     ),
@@ -131,7 +132,7 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1A1A1A),
+                          backgroundColor: AppColors.primaryNavy,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
@@ -173,7 +174,7 @@ class _SorunBildirScreenState extends State<SorunBildirScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 2),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1A1A1A),
+                          color: AppColors.primaryNavy,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(

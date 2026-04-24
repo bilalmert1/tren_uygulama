@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 
 class BaskentKartScreen extends StatelessWidget {
   const BaskentKartScreen({super.key});
@@ -20,7 +21,7 @@ class BaskentKartScreen extends StatelessWidget {
         final isEN = AppState.instance.locale.languageCode == 'en';
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           body: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 32),
             child: Column(
@@ -32,7 +33,7 @@ class BaskentKartScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(28),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF1A2A3A), Color(0xFF000000)],
+                      colors: [AppColors.primaryNavy, AppColors.primaryBlue],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -57,15 +58,15 @@ class BaskentKartScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF00FF88).withOpacity(0.2),
+                              color: AppColors.accentYellow.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                  color: const Color(0xFF00FF88), width: 0.5),
+                                  color: AppColors.accentYellow, width: 0.5),
                             ),
                             child: const Text(
                               'EGO',
                               style: TextStyle(
-                                  color: Color(0xFF00FF88),
+                                  color: AppColors.accentYellow,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12),
                             ),
@@ -229,8 +230,8 @@ class BaskentKartScreen extends StatelessWidget {
                     label: Text(
                         isEN ? 'Visit Official Site' : 'Resmi Siteye Git'),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFF1A1A1A),
-                      side: const BorderSide(color: Color(0xFF1A1A1A)),
+                      foregroundColor: AppColors.primaryNavy,
+                      side: const BorderSide(color: AppColors.primaryNavy),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
@@ -290,10 +291,10 @@ class BaskentKartScreen extends StatelessWidget {
           width: 42,
           height: 42,
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1A1A).withOpacity(0.06),
+            color: AppColors.primaryNavy.withOpacity(0.06),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(icon, color: const Color(0xFF1A1A1A), size: 20),
+          child: Icon(icon, color: AppColors.primaryNavy, size: 20),
         ),
         const SizedBox(width: 14),
         Expanded(

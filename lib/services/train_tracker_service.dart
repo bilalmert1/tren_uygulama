@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+import 'package:latlong2/latlong.dart';
 import '../models/station.dart';
+import '../data/baskentray_route.dart';
 import 'time_service.dart';
 
 class TrainTrackerService {
@@ -59,6 +62,8 @@ class TrainTrackerService {
   }
 
   static ActiveTrain _interpolate(List<Station> route, double elapsed, TrainDirection direction) {
+    final allStations = Station.allStations;
+    
     for (int i = 0; i < route.length - 1; i++) {
       final s1 = route[i];
       final s2 = route[i + 1];
@@ -70,15 +75,40 @@ class TrainTrackerService {
         final segmentDuration = (d2 - d1).toDouble();
         if (segmentDuration == 0) return ActiveTrain(lat: s1.latitude, lng: s1.longitude, direction: direction);
         
-        final ratio = (elapsed - d1) / segmentDuration;
-        final lat = s1.latitude + (s2.latitude - s1.latitude) * ratio;
-        final lng = s1.longitude + (s2.longitude - s1.longitude) * ratio;
+        const double waitTime = 0.5;
+        double ratio = 0.0;
+        final travelDuration = segmentDuration - waitTime;
         
-        return ActiveTrain(lat: lat, lng: lng, direction: direction);
+        if (travelDuration <= 0) {
+          ratio = (elapsed - d1) / segmentDuration;
+        } else {
+          if (elapsed - d1 < travelDuration) {
+            double linearRatio = (elapsed - d1) / travelDuration;
+            ratio = (1 - math.cos(linearRatio * math.pi)) / 2;
+          } else {
+            ratio = 1.0;
+          }
+        }
+        
+        // --- Gerçek Rota Üzerinde Nokta Bulma ---
+        // Istasyonlarin orijinal listedeki indexlerini bul
+        final s1IdxInAll = allStations.indexWhere((s) => s.name == s1.name);
+        final s2IdxInAll = allStations.indexWhere((s) => s.name == s2.name);
+        
+        // Rota noktalarindaki indexlerini al
+        final p1Idx = BaskentrayRoute.stationIndices[s1IdxInAll];
+        final p2Idx = BaskentrayRoute.stationIndices[s2IdxInAll];
+        
+        // Ratio'ya gore noktayi sec
+        final totalPointsInSegment = (p2Idx - p1Idx).abs();
+        final targetPointIdx = p1Idx + (ratio * (p2Idx - p1Idx)).round();
+        
+        final targetLatLng = BaskentrayRoute.points[targetPointIdx];
+        
+        return ActiveTrain(lat: targetLatLng.latitude, lng: targetLatLng.longitude, direction: direction);
       }
     }
     
-    // Fallback
     return ActiveTrain(lat: route.last.latitude, lng: route.last.longitude, direction: direction);
   }
 }

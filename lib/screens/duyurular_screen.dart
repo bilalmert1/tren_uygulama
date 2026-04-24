@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 
 class DuyurularScreen extends StatelessWidget {
   const DuyurularScreen({super.key});
@@ -73,24 +74,24 @@ class DuyurularScreen extends StatelessWidget {
         final isEN = AppState.instance.locale.languageCode == 'en';
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
               isEN ? 'Announcements' : 'Duyurular',
               style: const TextStyle(
-                  color: Color(0xFF1A1A1A), fontWeight: FontWeight.w800),
+                  color: AppColors.primaryNavy, fontWeight: FontWeight.w800),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new,
-                  color: Color(0xFF1A1A1A), size: 20),
+                  color: AppColors.primaryNavy, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
               IconButton(
                 icon: const Icon(Icons.open_in_browser,
-                    color: Color(0xFF1A1A1A)),
+                    color: AppColors.primaryNavy),
                 tooltip: isEN ? 'Official Site' : 'Resmi Site',
                 onPressed: _openOfficialSite,
               ),
@@ -137,8 +138,8 @@ class DuyurularScreen extends StatelessWidget {
                     ? 'More Announcements (Official Site)'
                     : 'Daha Fazla Duyuru (Resmi Site)'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF1A1A1A),
-                  side: const BorderSide(color: Color(0xFF1A1A1A)),
+                  foregroundColor: AppColors.primaryNavy,
+                  side: const BorderSide(color: AppColors.primaryNavy),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),

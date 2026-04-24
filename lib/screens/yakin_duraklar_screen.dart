@@ -4,6 +4,7 @@ import '../models/station.dart';
 import '../services/location_service.dart';
 import '../services/time_service.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 import 'detail_screen.dart';
 
 class YakinDurakScreen extends StatefulWidget {
@@ -89,14 +90,14 @@ class _YakinDurakScreenState extends State<YakinDurakScreen> {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           body: _isLoading
               ? const Center(
-                  child: CircularProgressIndicator(color: Color(0xFF1A1A1A)),
+                  child: CircularProgressIndicator(color: AppColors.primaryNavy),
                 )
               : RefreshIndicator(
                   onRefresh: _loadStations,
-                  color: const Color(0xFF1A1A1A),
+                  color: AppColors.primaryNavy,
                   child: CustomScrollView(
                     slivers: [
                       _buildAppBar(context, isEN),
@@ -117,12 +118,12 @@ class _YakinDurakScreenState extends State<YakinDurakScreen> {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF1A1A1A), size: 20),
+        icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.primaryNavy, size: 20),
         onPressed: () => Navigator.pop(context),
       ),
       title: Text(
         isEN ? 'Find Stop' : 'Durak Bul',
-        style: const TextStyle(color: Color(0xFF1A1A1A), fontWeight: FontWeight.w900, fontSize: 18),
+        style: const TextStyle(color: AppColors.primaryNavy, fontWeight: FontWeight.w900, fontSize: 18),
       ),
     );
   }
@@ -137,7 +138,7 @@ class _YakinDurakScreenState extends State<YakinDurakScreen> {
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFF1A1A1A), Color(0xFF333333)],
+            colors: [AppColors.primaryNavy, AppColors.primaryBlue],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -155,7 +156,7 @@ class _YakinDurakScreenState extends State<YakinDurakScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.my_location, color: Color(0xFF00FF88), size: 16),
+                const Icon(Icons.my_location, color: AppColors.accentYellow, size: 16),
                 const SizedBox(width: 8),
                 Text(
                   isEN ? 'NEAREST TO YOU' : 'SİZE EN YAKIN DURAK',
@@ -173,12 +174,12 @@ class _YakinDurakScreenState extends State<YakinDurakScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF00FF88).withOpacity(0.2),
+                  color: AppColors.accentYellow.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   _formatDistance(distance),
-                  style: const TextStyle(color: Color(0xFF00FF88), fontWeight: FontWeight.bold, fontSize: 13),
+                  style: const TextStyle(color: AppColors.accentYellow, fontWeight: FontWeight.bold, fontSize: 13),
                 ),
               ),
             const SizedBox(height: 20),
@@ -240,10 +241,10 @@ class _YakinDurakScreenState extends State<YakinDurakScreen> {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1A1A1A).withOpacity(0.05),
+                    color: AppColors.primaryNavy.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Center(child: Icon(Icons.train_outlined, color: Color(0xFF1A1A1A), size: 18)),
+                  child: const Center(child: Icon(Icons.train_outlined, color: AppColors.primaryNavy, size: 18)),
                 ),
                 title: Text(station.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 subtitle: Text(

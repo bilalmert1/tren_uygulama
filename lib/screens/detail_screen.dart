@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/station.dart';
 import '../services/time_service.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 
 class DetailScreen extends StatefulWidget {
   final Station station;
@@ -94,7 +95,7 @@ class _DetailScreenState extends State<DetailScreen> {
       expandedHeight: 120,
       pinned: true,
       elevation: 0,
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: AppColors.primaryNavy,
       centerTitle: true, // Başlık ortalı
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
@@ -123,7 +124,7 @@ class _DetailScreenState extends State<DetailScreen> {
             letterSpacing: 1.2,
           ),
         ),
-        background: Container(color: const Color(0xFF1A1A1A)),
+        background: Container(color: AppColors.primaryNavy),
       ),
     );
   }
@@ -137,7 +138,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
-        color: const Color(0xFF1A1A1A),
+        color: AppColors.primaryNavy,
         child: Column(
           children: [
             Row(
@@ -175,7 +176,7 @@ class _DetailScreenState extends State<DetailScreen> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFF00FF88) : Colors.white.withOpacity(0.08),
+            color: isSelected ? AppColors.accentYellow : Colors.white.withOpacity(0.08),
             borderRadius: BorderRadius.circular(14),
             border: isSelected ? null : Border.all(color: Colors.white12),
           ),
@@ -184,7 +185,7 @@ class _DetailScreenState extends State<DetailScreen> {
               label,
               style: TextStyle(
                 fontWeight: FontWeight.w800,
-                color: isSelected ? Colors.black : Colors.white70,
+                color: isSelected ? AppColors.primaryNavy : Colors.white70,
                 fontSize: 13,
               ),
             ),
@@ -203,8 +204,8 @@ class _DetailScreenState extends State<DetailScreen> {
           children: [
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF5F7FA),
+              decoration: const BoxDecoration(
+                color: AppColors.backgroundLight,
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.directions_transit_outlined, size: 40, color: Colors.grey[400]),
@@ -245,7 +246,7 @@ class _DetailScreenState extends State<DetailScreen> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 32),
         decoration: const BoxDecoration(
-          color: Color(0xFF1A1A1A),
+          color: AppColors.primaryNavy,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40),
             bottomRight: Radius.circular(40),
@@ -274,7 +275,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: Icon(Icons.arrow_forward, color: Colors.white12, size: 14),
                   ),
-                  _stationLabel(destName, const Color(0xFF00FF88)),
+                  _stationLabel(destName, AppColors.accentYellow),
                 ],
               ),
             ),
@@ -292,7 +293,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: [
-                        const Color(0xFF00FF88).withOpacity(0.15),
+                        AppColors.accentYellow.withOpacity(0.15),
                         Colors.transparent,
                       ],
                     ),
@@ -315,7 +316,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     Text(
                       isEN ? 'REMAINING' : 'KALAN SÜRE',
                       style: const TextStyle(
-                        color: Color(0xFF00FF88),
+                        color: AppColors.accentYellow,
                         fontSize: 12,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 4,
@@ -379,12 +380,12 @@ class _DetailScreenState extends State<DetailScreen> {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: const Color(0xFF00FF88).withOpacity(0.1),
+        color: AppColors.accentYellow.withOpacity(0.1),
         shape: BoxShape.circle,
       ),
       child: Transform.flip(
         flipX: _selectedDirection == TrainDirection.sincan,
-        child: const Icon(Icons.train, color: Color(0xFF00FF88), size: 18),
+        child: const Icon(Icons.train, color: AppColors.accentYellow, size: 18),
       ),
     );
   }
@@ -400,7 +401,7 @@ class _DetailScreenState extends State<DetailScreen> {
               width: 4,
               height: 20,
               decoration: BoxDecoration(
-                color: const Color(0xFF1A1A1A),
+                color: AppColors.primaryBlue,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -410,7 +411,7 @@ class _DetailScreenState extends State<DetailScreen> {
               style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w900,
-                color: Color(0xFF1A1A1A),
+                color: AppColors.primaryNavy,
                 letterSpacing: 1,
               ),
             ),
@@ -462,7 +463,7 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Text(
                 time,
                 style: TextStyle(
-                  color: isPassed ? Colors.grey[400] : const Color(0xFF1A1A1A),
+                  color: isPassed ? AppColors.textMedium : AppColors.primaryNavy,
                   fontWeight: isPassed ? FontWeight.w500 : FontWeight.w800,
                   fontSize: 16,
                 ),

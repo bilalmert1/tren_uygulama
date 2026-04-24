@@ -6,6 +6,7 @@ import '../services/location_service.dart';
 import '../services/time_service.dart';
 import '../services/distance_service.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 import 'detail_screen.dart';
 import 'duyurular_screen.dart';
 import 'station_search_screen.dart';
@@ -131,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1A1A1A),
+              backgroundColor: AppColors.primaryNavy,
               foregroundColor: Colors.white,
             ),
             onPressed: () {
@@ -161,17 +162,17 @@ class _HomeScreenState extends State<HomeScreen> {
         final isEN = AppState.instance.locale.languageCode == 'en';
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           body: RefreshIndicator(
             onRefresh: _refreshData,
-            color: const Color(0xFF1A1A1A),
+            color: AppColors.primaryBlue,
             child: CustomScrollView(
               slivers: [
                 if (_isLoading)
                   const SliverFillRemaining(
                     child: Center(
                         child: CircularProgressIndicator(
-                            color: Color(0xFF1A1A1A))),
+                            color: AppColors.primaryBlue)),
                   )
                 else ...[
                   _buildNearestStation(isEN),
@@ -223,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(22),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF1A2A3A), Color(0xFF000000)],
+              colors: [AppColors.primaryNavy, AppColors.primaryBlue],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -245,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     isEN ? 'NEAREST STOP' : 'SİZE EN YAKIN DURAK',
                     style: const TextStyle(
-                      color: Colors.white54,
+                      color: AppColors.lightBlue,
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5,
@@ -255,11 +256,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
                       color: _isLocationActual 
-                          ? const Color(0xFF00FF88).withOpacity(0.2)
-                          : Colors.amber.withOpacity(0.2),
+                          ? AppColors.success.withOpacity(0.2)
+                          : AppColors.accentYellow.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
-                        color: _isLocationActual ? const Color(0xFF00FF88) : Colors.amber,
+                        color: _isLocationActual ? AppColors.success : AppColors.accentYellow,
                         width: 0.5,
                       ),
                     ),
@@ -268,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           _isLocationActual ? Icons.location_on : Icons.location_searching,
-                          color: _isLocationActual ? const Color(0xFF00FF88) : Colors.amber,
+                          color: _isLocationActual ? AppColors.success : AppColors.accentYellow,
                           size: 10,
                         ),
                         const SizedBox(width: 4),
@@ -277,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? (isEN ? 'ACTUAL' : 'GERÇEK KONUM')
                               : (isEN ? 'LOCATING...' : 'KONUM ARANIYOR...'),
                           style: TextStyle(
-                            color: _isLocationActual ? const Color(0xFF00FF88) : Colors.amber,
+                            color: _isLocationActual ? AppColors.success : AppColors.accentYellow,
                             fontSize: 9,
                             fontWeight: FontWeight.bold,
                           ),
@@ -305,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: _directionMinCard(
                         label: '← Kayaş',
                         timeStr: textKayas,
-                        accent: const Color(0xFF00FF88),
+                        accent: AppColors.accentYellow,
                       ),
                     ),
                   if (showKayas && showSincan) const SizedBox(width: 10),
@@ -314,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: _directionMinCard(
                         label: 'Sincan →',
                         timeStr: textSincan,
-                        accent: const Color(0xFF60AFFF),
+                        accent: AppColors.lightBlue,
                       ),
                     ),
                 ],
@@ -381,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: const TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
-                color: Colors.grey,
+                color: AppColors.textMedium,
                 letterSpacing: 1.5,
               ),
             ),
@@ -394,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       Icon(Icons.train,
-                          color: const Color(0xFF1A1A1A).withOpacity(0.6),
+                          color: AppColors.primaryNavy.withOpacity(0.6),
                           size: 26),
                     ],
                   ),
@@ -406,8 +407,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 _toStation != null &&
                 _fromStation != _toStation) ...[
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 14),
-                child: Divider(height: 1, color: Color(0xFFF0F0F0)),
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Divider(height: 1, color: AppColors.backgroundLight),
               ),
               _buildTripDetails(isEN),
             ],
@@ -427,7 +428,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(label,
             style: const TextStyle(
-                color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                color: AppColors.textMedium, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1)),
         const SizedBox(height: 4),
         DropdownButtonHideUnderline(
           child: DropdownButton<Station>(
@@ -436,9 +437,9 @@ class _HomeScreenState extends State<HomeScreen> {
             value: value,
             hint: Text(isEN ? 'Select' : 'Seç',
                 style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
-            icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 18),
+            icon: const Icon(Icons.keyboard_arrow_down, color: AppColors.textMedium, size: 18),
             style: const TextStyle(
-                color: Color(0xFF1A1A1A),
+                color: AppColors.primaryNavy,
                 fontSize: 15,
                 fontWeight: FontWeight.bold),
             items: _stations
@@ -490,14 +491,14 @@ class _HomeScreenState extends State<HomeScreen> {
             isEN ? 'Next Train' : 'Sonraki Tren',
             nextStr,
             textLeft,
-            const Color(0xFF00FF88),
+            AppColors.primaryBlue,
           ),
           Container(width: 1, height: 50, color: Colors.grey.withOpacity(0.2)),
           _tripInfoCol(
             isEN ? 'Est. Arrival' : 'Tahmini Varış',
             arrStr,
             '~$journeyDur ${isEN ? 'min' : 'dk sürecek'}',
-            Colors.blueGrey,
+            AppColors.textMedium,
           ),
         ],
       ),
@@ -508,13 +509,13 @@ class _HomeScreenState extends State<HomeScreen> {
       String label, String time, String sub, Color subColor) {
     return Column(
       children: [
-        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        Text(label, style: const TextStyle(color: AppColors.textMedium, fontSize: 12)),
         const SizedBox(height: 4),
         Text(time,
             style: const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 22,
-                color: Color(0xFF1A1A1A))),
+                color: AppColors.primaryNavy)),
         const SizedBox(height: 2),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -649,7 +650,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF1A1A1A),
+                        color: AppColors.primaryNavy,
                         height: 1.3,
                       ),
                     ),

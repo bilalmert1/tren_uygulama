@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_state.dart';
+import '../theme/app_colors.dart';
 
 class YakinBayilerScreen extends StatelessWidget {
   const YakinBayilerScreen({super.key});
@@ -77,24 +78,24 @@ class YakinBayilerScreen extends StatelessWidget {
         final isEN = AppState.instance.locale.languageCode == 'en';
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F7FA),
+          backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
               isEN ? 'Nearby Dealers' : 'Yakın Bayiler',
               style: const TextStyle(
-                  color: Color(0xFF1A1A1A), fontWeight: FontWeight.w800),
+                  color: AppColors.primaryNavy, fontWeight: FontWeight.w800),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new,
-                  color: Color(0xFF1A1A1A), size: 20),
+                  color: AppColors.primaryNavy, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
               IconButton(
                 icon: const Icon(Icons.open_in_browser,
-                    color: Color(0xFF1A1A1A)),
+                    color: AppColors.primaryNavy),
                 onPressed: _openEgoSite,
               ),
             ],
@@ -140,8 +141,8 @@ class YakinBayilerScreen extends StatelessWidget {
                 label: Text(
                     isEN ? 'All Sales Points (EGO Site)' : 'Tüm Satış Noktaları (EGO Sitesi)'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF1A1A1A),
-                  side: const BorderSide(color: Color(0xFF1A1A1A)),
+                  foregroundColor: AppColors.primaryNavy,
+                  side: const BorderSide(color: AppColors.primaryNavy),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
@@ -199,7 +200,7 @@ class YakinBayilerScreen extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: const Color(0xFF1A1A1A).withOpacity(0.07),
+                color: AppColors.primaryNavy.withOpacity(0.07),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
@@ -207,7 +208,7 @@ class YakinBayilerScreen extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A)),
+                    color: AppColors.primaryNavy),
               ),
             ),
           ],
