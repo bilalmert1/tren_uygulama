@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'providers/app_state.dart';
-import 'screens/main_scaffold.dart';
+import 'screens/splash_screen.dart';
 import 'theme/app_colors.dart';
 
 void main() async {
@@ -71,12 +71,12 @@ class AnkaraTrenApp extends StatelessWidget {
               elevation: 0,
             ),
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: AppColors.primaryNavy,
-              selectedItemColor: AppColors.accentYellow,
+              backgroundColor: AppColors.cardWhite,
+              selectedItemColor: AppColors.primaryBlue,
               unselectedItemColor: AppColors.lightBlue,
             ),
           ),
-          home: const MainScaffold(),
+          home: const SplashScreen(),
         );
       },
     );
